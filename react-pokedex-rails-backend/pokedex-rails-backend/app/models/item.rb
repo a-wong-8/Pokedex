@@ -12,5 +12,10 @@
 #  updated_at :datetime         not null
 #
 class Item < ApplicationRecord
-  belongs_to :pokemon, dependent: :destroy
+  validates :pokemon_id, :name, :price, :happiness, :image_url, presence: true
+  validates :name, length: { in: 3..255 }, uniqueness: { message: "'%{value}' is already in use" }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+
+  belongs_to :pokemon
+
 end

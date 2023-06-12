@@ -10,6 +10,10 @@
 #
 class PokeMove < ApplicationRecord
   
-  belongs_to :pokemon, dependent: :destroy
-  belongs_to :move, dependent: :destroy
+  validates :pokemon_id, uniqueness: {scope: :move_id}, 
+  validates :pokemon_id, :move_id, presence: true
+
+  belongs_to :pokemon
+  belongs_to :move
+
 end
